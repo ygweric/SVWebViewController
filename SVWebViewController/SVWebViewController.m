@@ -55,6 +55,10 @@
     [self.webView loadRequest:request];
 }
 
+- (void)loadUrl:(NSString*)url {
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+}
+
 #pragma mark - View lifecycle
 
 - (void)loadView {

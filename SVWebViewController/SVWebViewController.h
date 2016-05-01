@@ -14,6 +14,7 @@
 
 @property (nonatomic, weak) id<UIWebViewDelegate> delegate;
 
+- (void)loadUrl:(NSString*)url ;
 
 #pragma mark - UIWebViewDelegate
 
