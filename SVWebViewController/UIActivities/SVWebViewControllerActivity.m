@@ -15,10 +15,23 @@
 }
 
 - (UIImage *)activityImage {
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-        return [UIImage imageNamed:[self.activityType stringByAppendingString:@"-iPad"]];
-    else
-        return [UIImage imageNamed:self.activityType];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        UIImage *image = [UIImage imageNamed:[self.activityType stringByAppendingString:@"-iPad"]];
+        // If if framework with swift
+        if (!image) {
+            NSString *resourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"Frameworks/SVWebViewController.framework/%@-iPad@2x.png", self.activityType]];
+            image = [UIImage imageWithContentsOfFile:resourcePath];
+        }
+        return image;
+    } else {
+        UIImage *image = [UIImage imageNamed:self.activityType];
+        // If if framework with swift
+        if (!image) {
+            NSString *resourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"Frameworks/SVWebViewController.framework/%@@2x.png", self.activityType]];
+            image = [UIImage imageWithContentsOfFile:resourcePath];
+        }
+        return image;
+    }
 }
 
 - (void)prepareWithActivityItems:(NSArray *)activityItems {

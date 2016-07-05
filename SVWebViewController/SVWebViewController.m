@@ -127,7 +127,13 @@
 
 - (UIBarButtonItem *)backBarButtonItem {
     if (!_backBarButtonItem) {
-        _backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"SVWebViewController.bundle/SVWebViewControllerBack"]
+        UIImage *image = [UIImage imageNamed:@"SVWebViewController.bundle/SVWebViewControllerBack"];
+        // If if framework with swift
+        if (!image) {
+            NSString *resourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Frameworks/SVWebViewController.framework/SVWebViewControllerBack@2x.png"];
+            image = [UIImage imageWithContentsOfFile:resourcePath];
+        }
+        _backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:image
                                                               style:UIBarButtonItemStylePlain
                                                              target:self
                                                              action:@selector(goBackTapped:)];
@@ -138,7 +144,14 @@
 
 - (UIBarButtonItem *)forwardBarButtonItem {
     if (!_forwardBarButtonItem) {
-        _forwardBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"SVWebViewController.bundle/SVWebViewControllerNext"]
+        
+        UIImage *image = [UIImage imageNamed:@"SVWebViewController.bundle/SVWebViewControllerNext"];
+        // If if framework with swift
+        if (!image) {
+            NSString *resourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Frameworks/SVWebViewController.framework/SVWebViewControllerNext@2x.png"];
+            image = [UIImage imageWithContentsOfFile:resourcePath];
+        }
+        _forwardBarButtonItem = [[UIBarButtonItem alloc] initWithImage:image
                                                                  style:UIBarButtonItemStylePlain
                                                                 target:self
                                                                 action:@selector(goForwardTapped:)];
